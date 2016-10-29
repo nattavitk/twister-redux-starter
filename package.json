@@ -6,9 +6,14 @@
   "dependencies": {
     "bootstrap-sass": "^3.3.7",
     "classnames": "^2.2.5",
+    "history": "^2.1.2",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
-    "react-router": "^2.8.1"
+    "react-redux": "^4.4.5",
+    "react-router": "^2.8.1",
+    "redux": "^3.6.0",
+    "redux-router": "^2.1.2",
+    "redux-thunk": "^2.1.0"
   },
   "devDependencies": {
     "babel-cli": "^6.16.0",
@@ -33,7 +38,7 @@
     "webpack-module-hot-accept": "^1.0.4"
   },
   "scripts": {
-    "start": "webpack-dev-server",
+    "start": "webpack-dev-server --inline --hot",
     "build": "webpack"
   },
   "repository": {

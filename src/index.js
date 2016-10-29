@@ -1,17 +1,30 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { createStore, applyMiddleware, compose } from 'redux'
+import { Provider } from 'react-redux'
+import { ReduxRouter, reduxReactRouter } from 'redux-router'
+import { createHistory } from 'history'
+import thunk from 'redux-thunk'
+import rootReducer from './reducers'
 import customStyle from './styles/custom.scss'
 import mainStyle from './styles/main.scss'
-import { Router, Route, IndexRoute, browserHistory } from 'react-router'
-import MainLayout from './layouts/MainLayout'
-import BodyContainer from './components/BodyContainer'
+import routes from './routes'
+
+const store = createStore(rootReducer, compose(applyMiddleware(thunk), reduxReactRouter({ routes, createHistory })))
+
+if (module.hot) {
+  module.hot.accept('./reducers', () => {
+    const nextRootReducer = require('./reducers').default
+
+    store.replaceReducer(nextRootReducer)
+  })
+}
 
 const App = (
-  <Router history={browserHistory}>
-    <Route path='/' component={MainLayout}>
-      <IndexRoute component={BodyContainer} />
-      <Route path=':ownerUsername' component={BodyContainer} />
-    </Route>
-  </Router>
+  <Provider store={store}>
+    <ReduxRouter>
+      {routes}
+    </ReduxRouter>
+  </Provider>
 )
 ReactDOM.render(App, document.getElementById('react-root'))

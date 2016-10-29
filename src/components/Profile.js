@@ -4,7 +4,6 @@ import ProfileDetail from './ProfileDetail'
 import ProfileFollow from './ProfileFollow'
 
 const Profile = (props) => {
-
   const toggleFollow = () => {}
 
   const showProfileFollow = props.isOwnProfile ? '' :
